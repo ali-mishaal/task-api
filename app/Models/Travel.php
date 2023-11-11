@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Cviebrock\EloquentSluggable\Sluggable;
-use Database\Factories\TravelFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,12 +10,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Travel extends Model
 {
-    use HasUuids, Sluggable, HasFactory;
+    use HasFactory, HasUuids, Sluggable;
 
     protected $table = 'travels';
 
     protected $fillable = ['is_public', 'slug', 'name', 'description', 'number_of_days', 'number_of_nights'];
-
 
     public function tours(): HasMany
     {
@@ -32,8 +30,8 @@ class Travel extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 }

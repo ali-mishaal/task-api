@@ -14,7 +14,7 @@ class TravelFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => fake()->text(),
-            'number_of_days' => rand(1,20)
+            'number_of_days' => rand(1, 20),
         ];
     }
 }

@@ -4,7 +4,6 @@ namespace Tests\Feature\Api;
 
 use App\Models\Travel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TravelTest extends TestCase
@@ -14,7 +13,7 @@ class TravelTest extends TestCase
     public function test_get_travels_paginate(): void
     {
         Travel::factory(16)->create([
-            'is_public' => true
+            'is_public' => true,
         ]);
 
         $response = $this->get('/api/v1/travels');

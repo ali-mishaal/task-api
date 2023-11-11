@@ -4,7 +4,6 @@ namespace Tests\Feature\Api;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -14,12 +13,12 @@ class LoginTest extends TestCase
     public function test_login_successfully(): void
     {
         $user = User::factory()->create([
-            'email' => 'ali@admin.com'
+            'email' => 'ali@admin.com',
         ]);
 
         $response = $this->post('/api/v1/login', [
             'email' => $user->email,
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertStatus(200);
@@ -30,7 +29,7 @@ class LoginTest extends TestCase
     {
         $response = $this->post('/api/v1/login', [
             'email' => 'test@email.com',
-            'password' => 'password'
+            'password' => 'password',
         ]);
 
         $response->assertStatus(302);
@@ -39,12 +38,12 @@ class LoginTest extends TestCase
     public function test_login_fail_with_email_exists(): void
     {
         $user = User::factory()->create([
-            'email' => 'ali@admin.com'
+            'email' => 'ali@admin.com',
         ]);
 
         $response = $this->postJson('/api/v1/login', [
             'email' => $user->email,
-            'password' => 'passworddddd'
+            'password' => 'passworddddd',
         ]);
 
         $response->assertStatus(422);

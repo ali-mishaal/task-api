@@ -11,8 +11,8 @@ class TravelController extends Controller
 {
     public function __invoke(): AnonymousResourceCollection
     {
-       $travels = Travel::public()->paginate();
+        $travels = Travel::public()->paginate();
 
-       return TravelResource::collection($travels);
+        return TravelResource::collection($travels);
     }
 }

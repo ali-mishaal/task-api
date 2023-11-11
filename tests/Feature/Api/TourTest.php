@@ -5,7 +5,6 @@ namespace Tests\Feature\api;
 use App\Models\Tour;
 use App\Models\Travel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class TourTest extends TestCase
@@ -35,7 +34,7 @@ class TourTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertJsonCount(1, 'data');
-        $response->assertJsonFragment(['id'=> $tour->id]);
+        $response->assertJsonFragment(['id' => $tour->id]);
     }
 
     public function test_tours_price_show_correctly(): void
@@ -44,14 +43,14 @@ class TourTest extends TestCase
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 20.25
+            'price' => 20.25,
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours');
 
         $response->assertStatus(200);
         $response->assertJsonCount(1, 'data');
-        $response->assertJsonFragment(['price'=> '20.25']);
+        $response->assertJsonFragment(['price' => '20.25']);
     }
 
     public function test_tours_filter_by_date_From_correctly(): void
@@ -60,12 +59,12 @@ class TourTest extends TestCase
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'start_date' => now()
+            'start_date' => now(),
         ]);
 
         $tourLater = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'start_date' => now()->addDay(5)
+            'start_date' => now()->addDay(5),
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?dateFrom='.now()->addDay(2)->format('Y-m-d'));
@@ -81,12 +80,12 @@ class TourTest extends TestCase
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'start_date' => now()
+            'start_date' => now(),
         ]);
 
         $tourLater = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'start_date' => now()->addDay(5)
+            'start_date' => now()->addDay(5),
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?dateTo='.now()->addDay(1)->format('Y-m-d'));
@@ -102,17 +101,17 @@ class TourTest extends TestCase
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 200
+            'price' => 200,
         ]);
 
         $tourExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 300
+            'price' => 300,
         ]);
 
         $tourHighExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 400
+            'price' => 400,
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?priceFrom=30500');
@@ -128,24 +127,23 @@ class TourTest extends TestCase
         $response->assertJsonPath('data.0.id', $tourExpensive->id);
     }
 
-
     public function test_tours_filter_by_price_to_correctly(): void
     {
         $travel = Travel::factory()->create();
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 200
+            'price' => 200,
         ]);
 
         $tourExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 300
+            'price' => 300,
         ]);
 
         $tourHighExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 400
+            'price' => 400,
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?priceTo=30500');
@@ -167,17 +165,17 @@ class TourTest extends TestCase
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 200
+            'price' => 200,
         ]);
 
         $tourExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 300
+            'price' => 300,
         ]);
 
         $tourHighExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 400
+            'price' => 400,
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?sortBy=price&sortOrder=asc');
@@ -193,17 +191,17 @@ class TourTest extends TestCase
 
         $tour = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 200
+            'price' => 200,
         ]);
 
         $tourExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 300
+            'price' => 300,
         ]);
 
         $tourHighExpensive = Tour::factory()->create([
             'travel_id' => $travel->id,
-            'price' => 400
+            'price' => 400,
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours?sortBy=price&sortOrder=desc');

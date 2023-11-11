@@ -10,10 +10,10 @@ class TravelRequest extends FormRequest
     {
         return [
 
-            "is_public" => 'required|boolean',
-            "name" => 'required|string|max:225|unique:users,id',
-            "description" => 'required',
-            "number_of_days" => 'required|numeric'
+            'is_public' => 'required|boolean',
+            'name' => 'required|string|max:225|unique:users,id',
+            'description' => 'required',
+            'number_of_days' => 'required|numeric',
         ];
     }
 }

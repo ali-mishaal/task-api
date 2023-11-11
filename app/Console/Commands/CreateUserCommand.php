@@ -25,14 +25,14 @@ class CreateUserCommand extends Command
         $role = $this->choice('enter role', $roles->pluck('name')->toArray(), 1);
 
         $validator = Validator::make($user + ['role' => $role], [
-           'name' => 'required',
-           'email' => 'required|email|unique:users,email',
-           'password' => ['required', Password::default()],
-           'role' => 'required|exists:roles,name'
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => ['required', Password::default()],
+            'role' => 'required|exists:roles,name',
         ]);
 
-        if($validator->fails()){
-            foreach ($validator->errors()->all() as $error){
+        if ($validator->fails()) {
+            foreach ($validator->errors()->all() as $error) {
                 $this->error($error);
             }
 

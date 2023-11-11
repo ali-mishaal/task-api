@@ -4,10 +4,9 @@ namespace Tests\Feature\Api;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
 use Database\Seeders\RoleSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class TravelAdminTest extends TestCase
 {
@@ -49,10 +48,10 @@ class TravelAdminTest extends TestCase
         $user->roles()->attach(Role::where('name', 'admin')->value('id'));
 
         $response = $this->actingAs($user)->postJson('/api/v1/admin/travels', [
-            "is_public" => true,
-            "name" => "travel10",
-            "description" => "test",
-            "number_of_days" => 20
+            'is_public' => true,
+            'name' => 'travel10',
+            'description' => 'test',
+            'number_of_days' => 20,
         ]);
 
         $response->assertStatus(200);

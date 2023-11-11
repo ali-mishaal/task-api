@@ -5,9 +5,9 @@ namespace Tests\Feature\Api;
 use App\Models\Role;
 use App\Models\Travel;
 use App\Models\User;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use Database\Seeders\RoleSeeder;
 
 class TourAdminTest extends TestCase
 {
@@ -57,10 +57,10 @@ class TourAdminTest extends TestCase
         $travel = Travel::factory()->create();
 
         $response = $this->actingAs($user)->postJson('/api/v1/admin/travels/'.$travel->id.'/tours', [
-            "name" => "tour10",
-            "start_date" => now()->toDateString(),
-            "end_date" => now()->addDay(5)->toDateString(),
-            'price' => 100
+            'name' => 'tour10',
+            'start_date' => now()->toDateString(),
+            'end_date' => now()->addDay(5)->toDateString(),
+            'price' => 100,
         ]);
 
         $response->assertStatus(201);

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers\Api\V1\Admin;
-
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TourRequest;
@@ -13,8 +11,8 @@ class TourController extends Controller
 {
     public function store(Travel $travel, TourRequest $request): TourResource
     {
-      $tour =  $travel->tours()->create($request->validated());
+        $tour = $travel->tours()->create($request->validated());
 
-       return new TourResource($tour);
+        return new TourResource($tour);
     }
 }
